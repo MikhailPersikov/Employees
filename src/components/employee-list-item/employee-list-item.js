@@ -1,11 +1,9 @@
-import './employee-list-item.css'
+import './employee-list-item.css';
+import {Component} from 'react';
 
 const EmployeeListItem = ({name, surname,salary,increase}) => {
 
-  // My solution: 
-  // const defaultClass = "list-group-item d-flex justify-content-between";
-  // const trueClass = "list-group-item d-flex justify-content-between increase";
-  // <li className={(increase === true) ? trueClass : defaultClass}>
+ 
 
   let classNames = 'list-group-item d-flex justify-content-between';
   if (increase) {
