@@ -20,4 +20,3 @@ root.render(
   <App/>
 );
 
-console.log((Math.random() * (50 - -50) + -50).toFixed(0))
