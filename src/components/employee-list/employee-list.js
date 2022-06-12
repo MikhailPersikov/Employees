@@ -9,10 +9,13 @@ const EmployeeList = ({data,onDelete}) => {
       <EmployeeListItem 
       key={id} 
       {...itemProps}
-      onDelete={() => onDelete(id)}/>
+      onDelete={() => onDelete(id)}
+      />
     )
   })
 
+//onDelete ={() => onDelete(id)} why did he do it?
+// onDelete (id)
   return (
     <ul className="app-list list-group">
       {elements}
