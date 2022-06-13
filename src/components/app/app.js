@@ -14,14 +14,14 @@ class App extends Component {
     super(props)
     this.state = {
       data:[
-        {name: 'Pete', salary: 1400, increase: true ,id: 1},
-        {name: 'John', salary: 3800, increase: true ,id: 2},
-        {name: 'Kyle', salary: 200, increase: false ,id: 3},
-        {name: 'Mike', salary: 300, increase: true ,id: 4},
-        {name: 'Susan', salary: 900, increase: false ,id: 5},
+        {name: 'Pete', salary: 1400, increase: true , rise: true, id: 1},
+        {name: 'John', salary: 3800, increase: true , rise: false, id: 2},
+        {name: 'Kyle', salary: 200, increase: false , rise: false, id: 3},
+        {name: 'Mike', salary: 300, increase: true , rise: false, id: 4},
+        {name: 'Susan', salary: 900, increase: false , rise: false, id: 5},
       ]
     }
-    this.maxId = 4; 
+    this.maxId = 5; 
   }
 
   deleteItem = (id) => {
@@ -38,7 +38,8 @@ class App extends Component {
       name,
       salary,
       increase: false,
-      id:this.maxId +1,
+      rise: false,
+      id: ++this.maxId,
      }
      this.setState(({data}) => {
       const newArray = [...data,newEmployee]
@@ -48,10 +49,56 @@ class App extends Component {
      })
   }
 
+  onToggleIncrease = (id) => {
+    this.setState(({data})=> {
+
+      // const foundIndex = data.findIndex(el => el.id === id);
+      // const oldArr = data[foundIndex]
+      // const newItem = {...oldArr,increase: !oldArr.increase}
+      // const newArr = [...data.slice(0,foundIndex), newItem , ...data.slice(foundIndex+1)]
+      // return {
+      //   data:newArr
+      // }
+
+      // const foundIndex = data.findIndex(el => el.id === id);
+      // const newArr = data.map((el,index) => {
+      //   if(index === foundIndex) {
+      //     return {...el, increase: !el.increase}
+      //   } else {return el}
+      // })
+      // return { data:newArr }
+
+      // this.setState(({data})=> ({
+      //   data: data.map(item => {
+      //     if(item.id === id) {
+      //       return {...item, increase: !item.increase}
+      //     }
+      //     return item
+      //   })
+      // })
+      
+      const newArr = data.map(el => {
+        if(el.id === id) {
+          return {...el, increase: !el.increase}
+        } else {return el}
+      })
+      return { data:newArr }
+    })
+  }
+
+  onToggleRise = (id) => {
+    console.log('Rise',id)
+  }
+
   render() {
+    const employees = this.state.data.length;
+    const premium = this.state.data.filter(el => el.increase === true).length
     return (
       <div className="app">
-        <AppInfo/>
+        <AppInfo
+        totalEmployees={employees}
+        allPremium={premium}
+        />
   
         <div className="search-panel">
           <SearchPanel/>
@@ -61,6 +108,8 @@ class App extends Component {
         <EmployeeList 
         data={this.state.data}
         onDelete={this.deleteItem}
+        onToggleIncrease={this.onToggleIncrease}
+        onToggleRise={this.onToggleRise}
        />
   
         <EmployeeAddForm
@@ -69,5 +118,8 @@ class App extends Component {
     ) 
   }  
 }
+
+// const a = new App('test');
+// console.log(a.totalEmployees())
 
 export default App;
