@@ -42,52 +42,63 @@ class App extends Component {
       id: ++this.maxId,
      }
      this.setState(({data}) => {
-      const newArray = [...data,newEmployee]
-      return {
-        data: newArray
-      }
+      if(newEmployee.name.length < 1) {
+        console.log('WARNING')
+      } else {
+        const newArray = [...data,newEmployee]
+        return {
+          data: newArray
+        }
+      }     
      })
   }
 
-  onToggleIncrease = (id) => {
-    this.setState(({data})=> {
+  // onToggleIncrease = (id) => {
+  //   this.setState(({data})=> {
 
-      // const foundIndex = data.findIndex(el => el.id === id);
-      // const oldArr = data[foundIndex]
-      // const newItem = {...oldArr,increase: !oldArr.increase}
-      // const newArr = [...data.slice(0,foundIndex), newItem , ...data.slice(foundIndex+1)]
-      // return {
-      //   data:newArr
-      // }
+  //     // const foundIndex = data.findIndex(el => el.id === id);
+  //     // const oldArr = data[foundIndex]
+  //     // const newItem = {...oldArr,increase: !oldArr.increase}
+  //     // const newArr = [...data.slice(0,foundIndex), newItem , ...data.slice(foundIndex+1)]
+  //     // return {
+  //     //   data:newArr
+  //     // }
 
-      // const foundIndex = data.findIndex(el => el.id === id);
-      // const newArr = data.map((el,index) => {
-      //   if(index === foundIndex) {
-      //     return {...el, increase: !el.increase}
-      //   } else {return el}
-      // })
-      // return { data:newArr }
+  //     // const foundIndex = data.findIndex(el => el.id === id);
+  //     // const newArr = data.map((el,index) => {
+  //     //   if(index === foundIndex) {
+  //     //     return {...el, increase: !el.increase}
+  //     //   } else {return el}
+  //     // })
+  //     // return { data:newArr }
 
-      // this.setState(({data})=> ({
-      //   data: data.map(item => {
-      //     if(item.id === id) {
-      //       return {...item, increase: !item.increase}
-      //     }
-      //     return item
-      //   })
-      // })
+  //     // this.setState(({data})=> ({
+  //     //   data: data.map(item => {
+  //     //     if(item.id === id) {
+  //     //       return {...item, increase: !item.increase}
+  //     //     }
+  //     //     return item
+  //     //   })
+  //     // })
       
-      const newArr = data.map(el => {
-        if(el.id === id) {
-          return {...el, increase: !el.increase}
-        } else {return el}
-      })
-      return { data:newArr }
-    })
-  }
+  //     const newArr = data.map(el => {
+  //       if(el.id === id) {
+  //         return {...el, increase: !el.increase}
+  //       } else {return el}
+  //     })
+  //     return { data:newArr }
+  //   })
+  // }
 
-  onToggleRise = (id) => {
-    console.log('Rise',id)
+  onToggleProp = (id,prop) => {
+    this.setState(({data}) => ({
+      data: data.map(el => {
+        if(el.id === id) {
+          return {...el, [prop]: !el[prop]}
+        } 
+        return el
+      })
+    }))
   }
 
   render() {
@@ -108,8 +119,7 @@ class App extends Component {
         <EmployeeList 
         data={this.state.data}
         onDelete={this.deleteItem}
-        onToggleIncrease={this.onToggleIncrease}
-        onToggleRise={this.onToggleRise}
+        onToggleProp={this.onToggleProp}
        />
   
         <EmployeeAddForm

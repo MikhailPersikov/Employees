@@ -12,9 +12,12 @@ class EmployeeAddForm extends Component {
     }
 
     onInputValue = (e) => {
-       this.setState({
-           [e.target.name]: e.target.value
-        })
+       if (e.target.value.length === 0) console.log('wrong')
+       else {
+            this.setState({
+                [e.target.name]: e.target.value
+             })
+        }
     }   
     
     onSubmit = (e) => {
