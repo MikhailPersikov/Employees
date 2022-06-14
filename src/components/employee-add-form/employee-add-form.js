@@ -2,7 +2,6 @@ import {Component} from 'react';
 import './employee-add-form.css';
 
 class EmployeeAddForm extends Component {
-
     constructor(props){
         super(props);
         this.state = {

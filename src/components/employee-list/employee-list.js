@@ -15,8 +15,6 @@ const EmployeeList = ({data, onDelete,onToggleProp}) => {
     )
   })
 
-//onDelete ={() => onDelete(id)} why did he do it?
-// onDelete (id)
   return (
     <ul className="app-list list-group">
       {elements}

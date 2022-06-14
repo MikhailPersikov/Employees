@@ -1,7 +1,6 @@
 import './employee-list-item.css';
 
-const EmployeeListItem = ({name, salary, increase, rise, onDelete, onToggleProp}) => {
-
+const EmployeeListItem = ({name, salary, increase, rise, onDelete, onToggleProp,onSearch}) => {
   let classNames = 'list-group-item d-flex justify-content-between';
   if (increase) {
     classNames += ' increase';
