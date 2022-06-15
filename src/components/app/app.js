@@ -14,13 +14,15 @@ class App extends Component {
     super(props)
     this.state = {
       data:[
-        {name: 'Pete', salary: 1400, increase: true , rise: false, id: 1},
+        {name: 'Pete', salary: 1400, increase: true , rise: true, id: 1},
         {name: 'John', salary: 3800, increase: true , rise: false, id: 2},
         {name: 'Kyle', salary: 200, increase: false , rise: false, id: 3},
         {name: 'Mike', salary: 300, increase: true , rise: false, id: 4},
         {name: 'Susan', salary: 900, increase: false , rise: false, id: 5},
       ],
       term: '',
+      rise: '',
+      salary: '',
     }
     this.maxId = 5; 
   }
@@ -73,6 +75,16 @@ class App extends Component {
     this.setState({term})
   }
 
+  onUpdateFilter = (rise) => {
+    this.setState({rise})
+  }
+
+  employeesFilter = (items) => {
+    console.log('items',items)
+    return items.filter(el => el.rise !== false)
+    //items.filter(el => el.rise) the same
+  }
+
   render() {
     const {data,term} = this.state;
     const employees = this.state.data.length;
@@ -88,7 +100,9 @@ class App extends Component {
   
         <div className="search-panel">
           <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
-          <AppFilter/>
+          <AppFilter 
+          onUpdateFilter={this.onUpdateFilter}
+          data={data}/>
         </div>
   
         <EmployeeList 
@@ -97,7 +111,8 @@ class App extends Component {
           onToggleProp={this.onToggleProp}
         />
   
-        <EmployeeAddForm addSubmit={this.addSubmit}/>
+        <EmployeeAddForm 
+        addSubmit={this.addSubmit}/>
       </div>
     ) 
   }  
